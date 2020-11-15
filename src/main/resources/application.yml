@@ -1,0 +1,36 @@
+# Spring properties
+spring:
+  application:
+    name: PromotionService
+  cloud:
+    config:
+      discovery:
+        enabled: false
+  data:
+    mongodb:
+      database: wdl
+      host: ec2-3-135-222-190.us-east-2.compute.amazonaws.com
+      port: 27017
+      username: wdl
+      password: secretPassword
+      constr: ""
+
+# HTTP Server
+server:
+  port: 20003  # HTTP (Tomcat) port
+
+
+# Discovery Server Access
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/ #${EUREKA_SERVER}
+  instance:
+    instanceId: ${spring.application.name}:${random.int}
+    metadataMap:
+      instanceId: ${spring.application.name}:${random.int}
+
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
